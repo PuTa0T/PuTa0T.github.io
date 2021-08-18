@@ -9,40 +9,40 @@
     <meta name="description" content="1 ARP协议1.1 基础知识 在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP&#x2F;IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的主机的IP地址，获得其MAC地址。这就是ARP协议要做的事情。所">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ARP欺骗原理及实现">
-<meta property="og:url" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:url" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="PuTa0T&#39; Blog">
 <meta property="og:description" content="1 ARP协议1.1 基础知识 在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP&#x2F;IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的主机的IP地址，获得其MAC地址。这就是ARP协议要做的事情。所">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662533037.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662553832.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662570761.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662585449.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662599188.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662618314.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662634872.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662650863.png">
-<meta property="og:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662663529.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662533037.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662553832.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662570761.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662585449.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662599188.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662618314.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662634872.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662650863.png">
+<meta property="og:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662663529.png">
 <meta property="article:published_time" content="2021-07-19T09:17:35.000Z">
 <meta property="article:modified_time" content="2021-08-18T09:30:23.078Z">
 <meta property="article:author" content="PuTa0T">
 <meta property="article:tag" content="ARP欺骗">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662533037.png">
+<meta name="twitter:image" content="http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/1626662533037.png">
     
     
       
         
-          <link rel="shortcut icon" href="/PuTa0T/puta0t.github.io/images/logo.png">
+          <link rel="shortcut icon" href="/images/logo.png">
         
       
       
         
-          <link rel="icon" type="image/png" href="/PuTa0T/puta0t.github.io/images/logo.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="/images/logo.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/PuTa0T/puta0t.github.io/images/logo.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
         
       
     
@@ -50,14 +50,14 @@
     <title>ARP欺骗原理及实现</title>
     <!-- styles -->
     
-<link rel="stylesheet" href="/PuTa0T/puta0t.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
     <!-- persian styles -->
     
     <!-- rss -->
     
     
-      <link rel="alternate" href="/PuTa0T/puta0t.github.io/true" title="PuTa0T&#39; Blog" type="application/atom+xml" />
+      <link rel="alternate" href="/true" title="PuTa0T&#39; Blog" type="application/atom+xml" />
     
 	<!-- mathjax -->
 	
@@ -73,19 +73,19 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/PuTa0T/puta0t.github.io/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/categories/">Categories</a></li>
+          <li><a href="/categories/">Categories</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/search/">Search</a></li>
+          <li><a href="/search/">Search</a></li>
          
-          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/PuTa0T">Projects</a></li>
         
       </ul>
     </span>
@@ -93,10 +93,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post " href="/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post " href="/PuTa0T/puta0t.github.io/2021/07/19/HTTP%E5%8D%8F%E8%AE%AE/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="/2021/07/19/HTTP%E5%8D%8F%E8%AE%AE/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -109,17 +109,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&text=ARP欺骗原理及实现"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&is_video=false&description=ARP欺骗原理及实现"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ARP欺骗原理及实现&body=Check out this article: https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&name=ARP欺骗原理及实现&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&t=ARP欺骗原理及实现"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&text=ARP欺骗原理及实现"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&is_video=false&description=ARP欺骗原理及实现"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ARP欺骗原理及实现&body=Check out this article: http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&name=ARP欺骗原理及实现&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&t=ARP欺骗原理及实现"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -157,14 +157,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/PuTa0T/puta0t.github.io/categories/%E5%8D%8F%E8%AE%AE/">协议</a>
+        <a class="category-link" href="/categories/%E5%8D%8F%E8%AE%AE/">协议</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="/PuTa0T/puta0t.github.io/tags/ARP%E6%AC%BA%E9%AA%97/" rel="tag">ARP欺骗</a>
+        <a class="tag-link-link" href="/tags/ARP%E6%AC%BA%E9%AA%97/" rel="tag">ARP欺骗</a>
     </div>
 
 
@@ -272,7 +272,7 @@
 <p><img src="1626662533037.png"></p>
 <p>攻击机开始前状态：</p>
 <p><img src="1626662553832.png"></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forword <span class="hljs-comment"># 启用流量转发，这样被攻击机就不会断网</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forword <span class="comment"># 启用流量转发，这样被攻击机就不会断网</span></span><br></pre></td></tr></table></figure>
 
 <p>开始攻击。</p>
 <p>通过ARP欺骗，建立 靶机–&gt;kali攻击机–&gt;网关的连接</p>
@@ -294,7 +294,7 @@
 <ul>
 <li>自动加载靶机图片</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt-get install driftnet<br>driftnet -i eth0<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install driftnet</span><br><span class="line">driftnet -i eth0</span><br></pre></td></tr></table></figure>
 
 <p>会出现一个黑窗口。</p>
 <h3 id="3-2-自己编写程序"><a href="#3-2-自己编写程序" class="headerlink" title="3.2 自己编写程序"></a>3.2 自己编写程序</h3><p>这一部分后续有时间会更新</p>
@@ -329,19 +329,19 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/PuTa0T/puta0t.github.io/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/categories/">Categories</a></li>
+          <li><a href="/categories/">Categories</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/search/">Search</a></li>
+          <li><a href="/search/">Search</a></li>
          
-          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/PuTa0T">Projects</a></li>
         
       </ul>
     </div>
@@ -352,17 +352,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&text=ARP欺骗原理及实现"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&is_video=false&description=ARP欺骗原理及实现"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ARP欺骗原理及实现&body=Check out this article: https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&name=ARP欺骗原理及实现&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&t=ARP欺骗原理及实现"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&text=ARP欺骗原理及实现"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&is_video=false&description=ARP欺骗原理及实现"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ARP欺骗原理及实现&body=Check out this article: http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&title=ARP欺骗原理及实现"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&name=ARP欺骗原理及实现&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/&t=ARP欺骗原理及实现"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -390,19 +390,19 @@
     <nav>
       <ul>
          
-          <li><a href="/PuTa0T/puta0t.github.io/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/categories/">Categories</a></li>
+          <li><a href="/categories/">Categories</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/search/">Search</a></li>
+          <li><a href="/search/">Search</a></li>
          
-          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/PuTa0T">Projects</a></li>
         
       </ul>
     </nav>
@@ -450,7 +450,7 @@
   </script>
 
 
-<script src="/PuTa0T/puta0t.github.io/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- search -->
 

