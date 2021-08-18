@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识共识算法">
+<meta property="og:url" content="https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="PuTa0T&#39; Blog">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-18T09:28:39.000Z">
+<meta property="article:modified_time" content="2021-08-18T09:29:31.436Z">
+<meta property="article:author" content="PuTa0T">
+<meta property="article:tag" content="共识算法">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/PuTa0T/puta0t.github.io/project/images/logo.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/PuTa0T/puta0t.github.io/project/images/logo.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/PuTa0T/puta0t.github.io/project/images/logo.png">
+        
+      
+    
+    <!-- title -->
+    <title>初识共识算法</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/PuTa0T/puta0t.github.io/project/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/PuTa0T/puta0t.github.io/project/true" title="PuTa0T&#39; Blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/">Home</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/about/">About</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/archives/">Writing</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/categories/">Categories</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/tags/">Tags</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/search/">Search</a></li>
+         
+          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/PuTa0T/puta0t.github.io/project/2021/08/17/Hexo%E6%93%8D%E4%BD%9C/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&text=初识共识算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&is_video=false&description=初识共识算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=初识共识算法&body=Check out this article: https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&name=初识共识算法&description=Here&#39;s something encrypted, password is required to continue reading."><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&t=初识共识算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        初识共识算法
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PuTa0T</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-08-18T09:28:39.000Z" itemprop="datePublished">2021-08-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/PuTa0T/puta0t.github.io/project/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/PuTa0T/puta0t.github.io/project/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/" rel="tag">共识算法</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="f526a23e22a41127c79cb887064a277aec64d9f332df8595b4208a6e5f844933">4af8291d7d4bfe809382abee478622f730fb2cf3a5b3f91739843be8e8bb47a04f82ca7ee50d9ee504eebbf36ae618a7e02a58bbfad7c8d9530e980ac03c915945a5613155f6fe5c55da08ee6c9497f20f340077d906c274c022645f284e90b88ea9fd74bb4c0be1e38917feab8198d6f23f0154ca83ad7bec7ec50119c5c2d546ec3b838c1f21fa3cea360e8896cd0183067c7985776da516149b1e9dc0a5d7d52a2ea5927078fe83ed08d6716d1a1a8064af4ed4b2292b9ba9e68d8d36531b7c495bcddcff2b95479ad73a7a7d37ff65edb8f9aa082d1ff03f6458edc715d6238ea02c7d6dccc6b7f9af14fc5cbdb1ec4ef2b8246852c702b32382b41a8cf140f3b7446fca4367cef7a6d134eec3cb0bbe5912bbb72c23397bfb765bc1b29a96ded0097cf0b4659c5fae71bae80649ee6f56b1039667def4e0cee45f8f5aef2c9eac0a0722fccb5d065b24fb63a108e9e59d9537ce88f0d6723dd6797c4f12bdf22d79996efb21d94ce1ee55dd3346d83e31ff25b91613b1be7dad86c2a728d87b0aa903251f74afc9a8c28acc11b2fd20028ebbb0e2ba6f928747e132df5953d20c0c834564f432609f4e7b991f3b5c944763eaa4eee5c965c7202c27947315c39d1fecc8e4910d32e7b9c6dc23b5a35010ce1dcfedbad9bcb4d33aa9cfe8062f99fb588c4074c7e1638a47a194bf77088eed3a0a703a20f30a6016780a1f573d3608ca3a9384bb96dff45c11c2178c36627e758d2d8c467a73914a45de2719cf0091b453175dd6e716d17dc8a830f92bf5531c4b982590b282e4aeadcc0d01a4cb4748cfd93d83e89cb52710213b823d36118514603ab92c820ad2bb4b59e3f9a58ca0b7061c4f7ea597d2ce1e8613ae03fc393ee8bd8869ac67c33de993dfffd16311718a73ecc986f9c6fe24904f8dcf3a8e4c74e318236ed30b54e4a660b0bb1837238e77c338284188001cfe6925aa43dee42fb0548ccdb8a2681547d779f983069570789e0627fe7496493bd49802761ad10b17b58d0cd6c7bffa7d6b1974d5b0885caa88caed003b471c83324711b5a88b2ed48f0c65e7582431b67b70a374fee3e9b0e36b87148972c4f0f9c5e322265f634153d11510739255a30b803950f2cea7e7a471e9e6c59f2ab15e19a09c262e4f44ac92854347babd0edbc723b6001b6a585163a63418c9fbd46bce9b113b469073cc0ee70e955bce8f2fb141a45a190cd7e7f5fc6beb3348f4ac3c877c5584a768188a30fd32b7940519cc0b6c17b5fadce7d59abbb5ecfcdb5762f1b0eba13d96d499ef02edad13c761820133e26f9037c5883bfb775ed732ffa354a7753590c013ce8d171a3fbe90331a59f2dc924b6453d6c8deb64538ef1fe8a9b04c837611ff65954465754cc1d2b10855585f8b081a8b87915d3fe70a0d631f7e3f8569adc7576bf519634c036b3e1db33b90bd95b4e716f852201fb02d111ae522c9e5b44af951bba65e085be91652a99c897729caca249a458047274c4b32d7783f01dee631e1021a2143ebcc4e3adce95989d24b51b5fa77cb947d56a1fb05cceab85639226dd4456080774532eaec5ee0ced2a76c11dd1c45372f6f776ec34bf6896ff9dc50c5ac2a08ed1934653bb30b6f9ad41b9bf81eb370dce241ae7ddde491423acba4c9283f845c7330d9cade8d276ab57babe4a9c799a0bc5f020f1792621b0fb3ea3e52bbc495b97e4b2f97d378de7458bca02712880edb1ea1cdb5c4ca642ac7763c6ca145cffa7264f3818f707848777556b4d646458177e33e18a2ced0ab7abc142a9a48981e07960a4204207cb7bfe897039954ecbc6ddf3346309e65f3a6e978ef4e3557a153377cfd0040ccfa954b9ca0e8aef8dd5e0286c7daf14cbb36c714ec4774e93c791922d3744159889018060571f85b2929833b77dfba543dfd97ce43cc472f6a2e5600fc00ea2e332c24cd9c8eab1e2346f90667dd7cf6694c03b1cf637d78e07e6135b1ee2717da74580879d4f45fe0e5395c28321ebba1f9632b03d5692d78a253873bb5adbff1d8f8a6322179e1645caf60708862816fe2a91078a210e4645bada4d4555848d1122686be16bb38ef08b3887519fa7545ded580cd0dbda14518397156641b9c968fb3fb3a5f91327a3acd073b30efa3bc70b4eb9128b697889431cae5d12c186fbce22121bd35984b7463de8784938c97451a123d33a0f5fe25f6294776bbae6c3896a5aeac2cf5f58e17d748c24abbbbd5ecc8cba30e55b543d9a5bdf3da6c1b75b8dc378143b06d599c5e3b98304dc7e24d5eb6578be8c0278966bb57b4284216206647321dd05c90b99bd4c04b6253875457145380f7dbf2917345a83f6b6a93dbb715cc14c141b1c7711080de7e89002a10f291b7c1c21c58e7011a144095850eaddaee3503e50a9ef49270e85d4a649e0e29bbc8cee8eddf4ac872902deb0ac07d96601569f4f89ed3b81742cf3e1aeca1a4bb21b8ec0bc2935d3120d69bb5d25034f16e00c3cfc398b744010375db2dedbe9766cad0d29998fc6bdb31a6820b265ecc95e55f890651b5f09af91195ad1379a5e93bcc6a6881ab00e1cf08bc2b7769e9c2ad3eeddee8ddd318d61a85292f791f21c97df5fad48aa36a4c7cd963764a4e4138e6995367b77cad07818a868b922e290d7591dda7e995b66377f224522e9c4da190a87520ac0fd18efb5f9ef05449464793d45961fac923529dadf5c8de56dfea08ff03128bbb7116d07be0c87891ee5f893f80cb9e4ad2a167db7bd5b815e152b61c603aea40f282846b2e900c04ca94f0834508008444999e6a9f387f8fe775e5905f5a420400198b47b78b2b193817ceac9d897df94f2a717529fc2883fbeade085a0e057effbde96d6d07f42667350ed21682d001937c1211d0e6ab52c577ec45ccad2ec0e7604d35be93e65dba2be3a22c506984887e2125a788075bbc6051b81f74e1845a3972c9730f2f63f27d019236e2a42964575f9e83af080f9c8fb92ef9fef945752f052d840ebf3a447a16e64f5c92909741332f9000bb8254ed92819a67b9852f26df70cca529e6d6f99d924f2cec05833b22679afa1478d53331a4ad55b82a5544c38aa67b004f2b9b3997f445eb10ee16f36fddbf090da4f39c82cb443ccc28b1fc0fb3b26bad9a4ff9239b3e39ced2b9d140e30f33d15842edb78324248baa091cba8b2a43ee6336455133d01f88644c7c75143668013278019f9b20da47b5ff62d9d3914a6669f906ec91c9d01a883e8289dae2af19704b3d44dfe285976843eb854da4220ea364cfbf3bd5ec2e6c368339e6c11481147766862940ddd59b92646cf44f11f254d8b7ecb38c87235d1a02b3b5201931dbcb37549f872e39772fec633ecbb959d16dd0f06e2ba0f1fa0e5869f562e46af6073900c7bbe5e2626a2dd543c2e89d8e121df9479e85074c6cd48f3cc5b7399b248adf7fd7aea9a9afcc21e07c981bc3ba527c90cce4e4b8eb82e4fb22dd0a88bdcd1ea3d6ed6df9030c6e63451fc7a96722c87c03e58bb29f36bb138e6d91cc8999b9de2a66535261a857df56e6a1cd14aef3eba605bf680af45f59244050cd38d536edd51d28a6cae47813cc5d26df7e9ab064095a224162e83acc1856109eef531ba26792a167527ff1039ab4828aff8c424a25eb240d98e088dcffd20dca317c9d15e7ebb860bdf7515d4e73092335bfcebff4e87a6ee044b09b528c517aefd8a3f89f61f2403db6646a3f6ca8fda73bf840b7dde6d2d1e4c36d05f844643c1c687b8773f4851ab6ffddb314ff8fa1fa4e1d97ee81901e6dbeda4b8431b1494d929050bc48530e842613c849a2a7369ec6b021dfab0ed38c9449982c475ecd91cd735cb00c425fc3cbaa3730f77664a6f962150321c4340f48c17c94dd8a6a3993825a5ca518a10a3546327c4555b3e723b51216a5fe6176e8b41322a82cf868a8fe2d0a770d720473f1fe15ae0d844ed5279785d5d727606afd9597b519e655572ca4a7a0f569ee7d90524dda4cfc9cfff4ea4e1a5f5a5c8b7ff2193e6b27764c20b450f87a5a39c57d8e5d3b4e3a59d2a5dff536153784da9cd0b7f01634477c5539bf3b395e6523f30f8c2383789aaf71c1103af1eaab72929f0cb2fd91419b6386d0e01e9ea53031bc1e4a0025da4349542d3ea813bb7696495601bf19820e89332505c54a215e3064c4b4696130155a321f428ac1e9f5c3c5140a9509a92b5e4754683aebe25ddeb747734a98a38a236eae78f6f2dbaad5198dcb6453e6015c552bd5eae15bdeb0cf40f9ada7ff0b7e7650ae884899f05cc6fd9cc35b5108d73dd39ae1a75c55b157b04a6a2e310e2d5b8ab6cf90223e420684769390ffc3e5e5cfab05b2356dd7edf354e019efa4717f71120af6efc233ed0def27801cb76bc68f8443870da8679ba8aed78640823d056590419659d24e64a699d433400b6e05d2acbe77fb4b74d9c83e4f3563c10f5b2baa60912d009d08036b43ef9a0fd1d1e3a46531f35267c32e4125974f15d1afa739c2387eebf5ef4e73d08e28364bbd2e66dfb6fc596a13051da572bed068c725b2d5aff4d73f1ce5bd62ccd93df2138849dd2f0dcb7378ea51705be45c0803862d9867b38f209a8109e40367775125769be96ad31fbbd668ddb3bb6d41f0f826402aa46edb9c8a2e4607b19e40d44b69fbb8d826eea9a979caf4d866d7db6c079a228cc65ad94fdd7c86292e7337b9932c3dfb9d312ebfde1cfae06497c0924d42b1f9be848405b58e78b243afb249ad32da93e6032511bc98517df2e25bd383866b213ead2a23ccfcd855a6e27355125f69f871795e47d9205250ed085d185b0cc1a7e8c5d1e83934fbf4d1483a828807e865f9d3556e378052261438320ad4eb389ec5a8f15c6ce6042039493c3208da5c0024c238154d64ba322722bdf571d8319a6770b2602b3158187ed5b77eeb2615b8e4abbf40d545fc63fea4caffc4843b07b5adc96e4e3c3043145d42922a8773c69a82a7367ec02a96b20ff59c87b654eb934d4fcc2140ee5dff20f17e73d221f183f6bcc576d2ab24094b6b0a2a4e1770b734d34bde8fe0a48d55198d66284538172ea88e012fb09b38765707f1b2184eafea14ca0b402032b189b3416d5b812ac2b725b9c64690d2a6dee285fcbb6ea703164f9863e4f5e109a77c596b67224e5f09d5144e797a599a8136bb9d5fe3f20ab9497ec79ad4435bcd2a2b2e79257ca1ba02d743fee6c7aa83197aff683359175adfe842a7dfc28b707869f9d4b5ae595f0da449346b880f3af14af86efe3ee59a53d0440830d3ee744df692c0434c1c3c1b3519ade1db00a5432782cb5773fe53ca3a90f1d9c8661b6cc2e239fb578352ec83f4af0f704b4d73ebcdd17183f90df92708ea2716a21ad9276ce598d3fb0fdb7cf575d1e2850ebf01ea9d4f76f96770f496f7877ebe16d70b82426d669b47c7bb895ef6761c8a78980a13978c694a426aa517ae09bad336966189a2b40fd329a95c5de3f0e0b425e9a7266f463eb3004988c067146707e9b22e2185ca92762bbd85184b1f148da65a185cec16e50e355f9357d1c3134de7aee59caed072d6a1772a775c769ae71f6c7b94423008731e42a0c8a8c141e54e8530475634f0ed231d33883e8b234597e60726298754cdf8b38572924ced5b241b2e5c2b730d1f7da98e3ac21cf097196ebda2667144351268ecce16f93affc20fb5d07e734b132c64f5014faeb2b3fa47bf6d5e99950e5c1f73d519aab6c6508467fbfd89b43eb3d5a572a4f0cabd05c2a22d6904f9ae4ff6c223d6efff9194ae1448bd9d30b7aecfd9e6acf3fea9bd4fd57b015100301701dd3568e9626c673b15690c442e7a455d4719730c3517479cf69766fa2d0155fcb680e6a6a3a8675bb2e9cb515f402eb607882d72900138e0071f1d5dcab5b3a7d04fef738a7649e4a5ac9be8ffb05b7be633a0579c77c5ab800c5183c087f739effc4f973c358030f6a918f383808eb01c56d48445b632d3259f58be7698c4483e709e762c29b02d869efbee8e2e8d766e732cc4b486fd078b197dff59724450a74d17fb2f9f7d83e7298b9b7063e6c8601764e25bc6cf1798ed5eba0b0895873c7952ca8f28f0baf6381c4937b08d66ebc16110494d98d1407c2d7d8caca9bf3d41c146998941716195fc618497a13b784a8ac43fa73f554baa32c92b48c217067c5b5f421fd910ec3dde4be20757a23db1604c563e2cdb96c8b97fddca131c02a3526f29bd2bc7756c99654cd51d01dbabfd821fdaff5413df27b564018c565536e97a890a9f89a58ad6dc260431e9d3ddd21407eed14897e9f24d10e46ee35b275f3a467728c430fb291b66f3b4a327c4f5a0a0abce65dc4ce184a2bfb77b86a98fc6799d70f2faf8c3afbde359d89ba31b2e7491b1f49d436c0cd7c25ea18988f53f601216d39402609cebf901def88436325b03bde5550f71d48a361dc598398179aead30711f0f4563c7a719fcef84aa1a6410d4ed6b8300abf4b1e62735874e3dce66146b04ce0e41b59c63ef39ad0e5e286001cd491fb661b0115561d85fa4c29736f052385569bd7b8d153a2ed806d7b86d6af8b7a7b3b2aac1dc4236b1de4a7f53657210c9c4b099add616ea8302a5b14c0fa282a2ee92bbeb423b249af06bd3d73cbfd11c56be5d7a338dceb818ef3cff5fc47897f22deaa08c485c7ca1c53c721f31e25788278116d0f2a6c1ccacaced8cc3767188fe5aff2875e5ad6df7da42e8cc383d24ce862f899896f0eb4cb94d617360ce9318f9db9cdd1706ef72a6edc8f83726dd272fb5266c07b631684743ae70b2b2794b58d5b2eb213c732d4b786aba3220c227f4472e922f5ccf7598bd52ef25fe03bedcc3057f7720e8a623cc72b2e8770f74d58525a27ff7b065bad5c39095ed7ad988057450aa8e73a6c431fca6dfc1502e9795818b6a558c85243bfbb155dedeec1f243e4944a7550e10cd683b20b6d33aba0b1719890227c8e461daf48a80e67412e6fee88c7b4141747a4800584c3fbe539cfd0c4839e8c93331f58f593a2b9cf4d0c55a1b701767c5949184bbb58adaa518f56a951b6725c96f68dfa083447c53f2651e9bbdfbbaca38d1184b0ec8e16fcbef316f63493e7081c3271f846330ba3005a65e700e5729c5d8e5274655f0437cbaf99ce822e6722d7ef884e60a8672108c161e3f71db9aa6cc2ad111084817e4a550ed1e56f6208c9bf714903f55d0b6d419d5df36d4f6db3bb0c085694ec8f88c8afdbc41e3c3d42416e8dee76fae69f69608d302bc40a0e44566c5fa9a8918232ea65bb1aa36c7697ef0146332c12eef8d1b6b0d3908c6e825321957fd600d4bd11d52c8e2a452e00f7ba3c873654856ca2770b8a3a9d614b595381f8cafe4b7f416b2c688c3042983854e8286b9561f38e5593ac7f800a5882e88e8f5674f4239b929fe6ef80ce1ceaba21ff108bcea19daf7bb65b47c690f999f4126b96d3ec132eab14817a76f43f97466bf887c4a699769d0bec0132a2604712b3eaff54364e0b2f72a54114b60dc8b482c65b574b6bab046a9d9e3c86e7b9cc4279dc2e2f73939170fb786b9b703cfbd6fe58012ca7fe1ef44800f4957e792528eaa157622054f90e205a805a3245fc1ca0813055b1d8df3dcf270edd4f9595b4dce3952e924de20ad3b68b1b4c124a0b6c4406c73f15ba2c6018a047bd778a3fb9dcff6704b5195830e8d498fa693f8a4aa0108f1c00cbfbb16fcd2dc11baaaef7b9609b68034fb9c1148487927d5146cd29218993d5e7cb1ba5c975cbc70dc5c20484c2aea42c69ec0725809c0a6b7731dc350bf51514c7af3807d3bf392cf1966dc968e5ca1538800e6047fa1cee325420ec439d63b1aa6c032c2f5cfdadcbb6c9cb26b170b34981d35e0b28153e39b05420ce719440f1176af233374676a8bd6b6df769136fbc9558630a371436eefff6708e9690ad3a64ce2c18dfffae713d51e6fc3146a91a261615931609c5930c20fc61509a469b7e9c0cf45ec8d675b75b15f97e495ef1b0e3ff09a242ec10d10531b0f9e6692830ef66c663acf05d164d5f7a22bc481fcdcb42cdbb83cb32b1a9052e6c027730cac7b692a3c319d479e6dfcb62c3b8e99d81047741216ac1858dcb8c11c79a813f01e167ff86ce8dc772101d1da0b2aadc98e4bf5ed751a788ab83383c9b029a6d1b175810e54e2ac857380c223cb7ffb8dfe25cccb10bd84e5072f8ebadff4f839ee7a20de95fa8ecf25a97de754ffcd42ae9ea240bde995dad4bf2a525bcc69a761a05ecb7ef379dcbcb06f94aaaf0848ffbcf7bde96ad23a76cef4a03a90b4eca67e7e3a70b5a54735a7df05baa32de7fedf80b91a84b4b8262aa8cd3c3105e602ce19801f888d55f6769dd1c1d848aa9f3cac67c7fb2a168913954ce0504927f538354294a653225a6b92b9ea93a5985524eb8af1699cc1719d4bf58b9c1a261c9a3fbfd3757ee99d73bdccf49de908933f84cca9c7189b3950a94063735a9f5f3da66bc2a8c2a8996dad550c3ed6a6431fa9dce5344f62e2b23de8710fd8013fd01024f677596ab23b6eac2d2f3dcfc3e34fd5b7c3b8338b7b74f6a546c30d7a58d07e571810e63e73309d0d22b0b4a006067d2d2f0adbceeab42d3e22710194c6a69b63d8dd2a81e97f88eef96ee8a474bfa9ce518e3a4fa4f1300115801e58e4ebfa2738c68d9cc6eca186ba465f30f95616e44e6f475c63df26dff8a1105a6b90fb025034fa92ae506a0ee3ba9b84494e455ac2984ec50d8c78b5a39921eb0c681be2c4a503707e6bb8db6c4636e918fce91952cdf926a267cc78e9f12e4573cd909f060a01e3d9cbfcacaec4bcd5f015428ffcff99c87f3748881d6312ca7116069af16fd7643f8f5d6b981ff90863a85ad00fce77acb80907fde06c97903855f88c9ef907e86363e17ac92dd266d1fd4a13fae036073a06ee73da8983b3463bc84a8cad929f0e43f7a54635e04d00b527f7a9a8e2ab992d81db5a15d189118c3a5f7139bd30ac186e1a3b2d987cd4676d35eb87743e1620fb2cde8ffa1ea1c0dbbe51bfd27cd9d296a55c486db5f651ed8b0843660556734ac6531b02c55c77f01e1989a7301fb1073ba3671ded181d4d247ce13440f0b8890c7c88011a57202d888f4153633c9b69035389781974e51f4ea3ee8720f4f0352b0458e73e9c7bd9462f875cb0e66181d9be7dc7d28620232a4f65ff2c0e6de2fadc0839671b0c4121833939a4044da83643f3ae9ebd0485f1bff3ef8b8c517e9adca83318c1da5cbb1006f6c9efa6b024129242f8b60be8cfb6a78d27f472ae63a110a7b109c190ff2a4d1300defa339d3c4dc89680d51d9b621c8922a33b3f027a834278e03e0c8a9c5c71c6d3e2027b05d26af467fe5e3a6f037418e2a056f4566c08b4df1d5ab6e946bc2b0a753f23cae2eed763084845eee4d7374a35e9945f2c6a13ee715f9e310be2f3537d37e127c582b5cbc14c0a7491a2f3ad41a8653e8a60bc379b0be8bffab43e000ff18e210cb05117e8e13ef3f0cedf2e0549a489b904cc9162e963cd659bef0cb8b53de24be1d700d2b0661275370a2ab0cdafa0fb8fe039b3d003bd1ffd5f236f855dec894f11887240dd153f04855ce96e9862bf644909084a4411829d63a47e491961e55a118fdc63c7842f5f5a4d057f19f4aa93be561934849512cf74610c57f6d854cd4c16122fc3a7875e40a2e64c6bb895dd3064db4bfc2703a90631dd831795328ea7026248d60f1384f3921b531be7e14a32203cbb7ed247c00bbfc8c3bb62ddb24e389ce358ce17fea04b0ff35bd975231a1dbf7da8b95970198cdac9f297d6ca7ac84b6a8763673a85b07ff3ce1aad9be660389d3809987b1baeb0ff4a2976777197864080bb6f52a87a11f4f369b634c3fd1ae76c6bda0e69b81e209e0265592301da55b95112903dc5327e01ff9c76635de29a91878e727e80da8d3add93fdd626d5f0fafb25d899ad79ca5e9738989447cba9bdafdb1a044f561fc3af176d4a08dccbbad9c5d03807c2c3cee6451a41c05e52af069b34913ddbb985f0ce31d9ec95db3aa74d4bcfae53f94cc371111410d35923777e3dfc64e11a7820036253a4c6acfced16da28dac2e99afcece8db41d9e2b97d969c15549ad6c270c0d8244dde42777c2a9f1c7b9b242d926442d4ad94ecf4d09190df3c5095398db918b69d75d1274a0f272445cb2b154392a8f06309792bb707c39deb5955a41b82cbca8deeabd88f5d677258186fe77a6e347add1cb9def3b7a2323b3f50e6aff336333e4d1a4624ab4d2a91aae8d4658fe10a483f5cf5a175a3af0d20c95d779bb5f70497f6c7a264c8fa768f25a5cd5d</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/PuTa0T/puta0t.github.io/project/lib/hbe.js"></script><link href="/PuTa0T/puta0t.github.io/project/css/hbe.style.css" rel="stylesheet" type="text/css">
+  </div>
+</article>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+            clientID: '81c1a69c9ae9045cb0a2',
+            clientSecret: '07103de7b8412ca94c29a49a90f8d32f25acf71c',
+            id: md5(window.location.pathname),
+            repo: 'puta0t.github.io',
+            owner: 'PuTa0T',
+            admin: 'PuTa0T',
+            distractionFreeMode: ''
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/">Home</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/about/">About</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/archives/">Writing</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/categories/">Categories</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/tags/">Tags</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/search/">Search</a></li>
+         
+          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&text=初识共识算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&is_video=false&description=初识共识算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=初识共识算法&body=Check out this article: https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&title=初识共识算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&name=初识共识算法&description=Here&#39;s something encrypted, password is required to continue reading."><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/PuTa0T/puta0t.github.io/project/2021/08/18/%E5%88%9D%E8%AF%86%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/&t=初识共识算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021
+    PuTa0T
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/">Home</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/about/">About</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/archives/">Writing</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/categories/">Categories</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/tags/">Tags</a></li>
+         
+          <li><a href="/PuTa0T/puta0t.github.io/project/search/">Search</a></li>
+         
+          <li><a href="https://github.com/PuTa0T">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/PuTa0T/puta0t.github.io/project/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
