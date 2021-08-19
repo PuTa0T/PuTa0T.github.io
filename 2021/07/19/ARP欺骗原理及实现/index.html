@@ -272,8 +272,8 @@
 <p><img src="1626662533037.png"></p>
 <p>攻击机开始前状态：</p>
 <p><img src="1626662553832.png"></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forword <span class="comment"># 启用流量转发，这样被攻击机就不会断网</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="sh">echo 1 &gt; /proc/sys/net/ipv4/ip_forword # 启用流量转发，这样被攻击机就不会断网
+</code></pre>
 <p>开始攻击。</p>
 <p>通过ARP欺骗，建立 靶机–&gt;kali攻击机–&gt;网关的连接</p>
 <p>首先使用<code>ettercap -G</code>指令启动图形化界面</p>
@@ -294,8 +294,9 @@
 <ul>
 <li>自动加载靶机图片</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install driftnet</span><br><span class="line">driftnet -i eth0</span><br></pre></td></tr></table></figure>
-
+<pre><code class="sh">apt-get install driftnet
+driftnet -i eth0
+</code></pre>
 <p>会出现一个黑窗口。</p>
 <h3 id="3-2-自己编写程序"><a href="#3-2-自己编写程序" class="headerlink" title="3.2 自己编写程序"></a>3.2 自己编写程序</h3><p>这一部分后续有时间会更新</p>
 
